@@ -1,20 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Delete Article</title>
-</head>
-<body>
- <h1 class=text-2xl>Are you sure you want to delete this aricle?</h1>
+{%extends 'idea_stream/_base.html'%}
+
+{%block content%}
+    <h1>Are you sure you want to delete this article?</h1>
 
     <h2>{{article.title}}</h2>
     <p>{{article.content}}</p>
     <p>Article Status: {{article.status}}</p>
 
-    <hr class="my-8">
+    <hr/>
     <form method="POST">
         {% csrf_token %}
-        <input class="px-5 py-2 rounded bg-red-200 hover:cursor-pointer hover:bg-red-300" type="submit" value="Delete">
+        <input type="submit" value="Delete">
     </form>
-</body>
-</html>
+    <a href="{% url 'home' %}">No, take me back!</a>
+{%endblock content%}

@@ -1,15 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Create/Edit Article</title>
-</head>
-<body>
-<h1>Article</h1>
+{%extends 'idea_stream/_base.html'%}
+
+{%block content%}
+<h1>
+    {% if object %}
+        Update Article
+    {% else %}
+        Create New Article
+    {% endif %}
+</h1>
+{% if object %}
+    <p>Last edited on {{article.updated_at | date:"jS F Y G:i"}}</p>
+    <p>{{article.word_count}} word{{article.word_count | pluralize}}</p>
+{% endif %}
 <form method="POST">
     {%csrf_token%}
     {{form.as_p}}
     <button type="submit">Save</button>
 </form>
-</body>
-</html>
+<a href="{% url 'home' %}">Back to Article List</a>
+{% if object %}
+    <a href="{% url 'article-delete' article.id %}">Delete Article</a>
+{% endif %}
+
+{%endblock content%}
